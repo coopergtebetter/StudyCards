@@ -33,8 +33,7 @@ class CardSetAdapter(private val context: Context, private val data: List<CardSe
         }
         holder.button.setOnClickListener {
             val intent = Intent(context, PracticeActivity::class.java).apply {
-                //TODO: save and store ID's for card sets
-                putExtra("ID", 1)
+                putExtra("ID", holder.titleView.text)
             }
             context.startActivity(intent)
         }
