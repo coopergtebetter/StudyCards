@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.studycards.databinding.ActivityCreateNewCardSetBinding
 
@@ -33,6 +34,7 @@ class CreateNewCardSet : AppCompatActivity() {
                 return@setOnClickListener
             }
             val prefEdit = this.getSharedPreferences("sets", Context.MODE_PRIVATE).edit()
+            Log.d("CreateNewCardSet", "submitting new card set: $t, $d")
             prefEdit.putString(t,d)
             prefEdit.commit()
             val intent = Intent(this, MainActivity::class.java)

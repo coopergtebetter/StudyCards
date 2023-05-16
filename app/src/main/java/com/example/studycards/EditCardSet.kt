@@ -4,31 +4,36 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.studycards.databinding.ActivityEditCardSetBinding
 import com.example.studycards.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class EditCardSet : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityEditCardSetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityEditCardSetBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 
     override fun onResume() {
         super.onResume()
 
-        val myData = Dataset().loadData(this)
+        binding = ActivityEditCardSetBinding.inflate(layoutInflater)
+        val id = intent.getStringExtra("ID")
+        val myData = Dataset().loadCards(this, id!!)
         if (myData.isEmpty()) binding.nothing.visibility = View.INVISIBLE
         else binding.nothing.visibility = View.VISIBLE
-        val recycler = binding.recycler
-        recycler.adapter = CardSetAdapter(this, myData)
+        val recycler = binding.cards
+        recycler.adapter = CardAdapter(this, myData)
         recycler.setHasFixedSize(true)
-        val fab = binding.newCard
+        val fab = binding.newCards
         fab.setOnClickListener {
-            val intent = Intent(this, CreateNewCardSet::class.java)
+            val intent = Intent(this, AddCard::class.java)
+            intent.putExtra("ID", id)
             startActivity(intent)
         }
     }

@@ -16,6 +16,7 @@ class CardSetAdapter(private val context: Context, private val data: List<CardSe
         val descView: TextView = view.findViewById(R.id.description)
         val button: Button = view.findViewById(R.id.button)
         val card: MaterialCardView = view.findViewById(R.id.card)
+        val editButton: Button = view.findViewById(R.id.button2)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -33,6 +34,12 @@ class CardSetAdapter(private val context: Context, private val data: List<CardSe
         }
         holder.button.setOnClickListener {
             val intent = Intent(context, PracticeActivity::class.java).apply {
+                putExtra("ID", holder.titleView.text)
+            }
+            context.startActivity(intent)
+        }
+        holder.editButton.setOnClickListener {
+            val intent = Intent(context, EditCardSet::class.java).apply {
                 putExtra("ID", holder.titleView.text)
             }
             context.startActivity(intent)

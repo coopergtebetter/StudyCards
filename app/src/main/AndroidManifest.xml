@@ -12,6 +12,9 @@
         android:theme="@style/Theme.StudyCards"
         tools:targetApi="31">
         <activity
+            android:name=".EditCardSet"
+            android:exported="false" />
+        <activity
             android:name=".AddCard"
             android:exported="false" />
         <activity
