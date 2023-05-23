@@ -16,17 +16,10 @@ class EditCardSet : AppCompatActivity() {
 
         binding = ActivityEditCardSetBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        binding = ActivityEditCardSetBinding.inflate(layoutInflater)
         val id = intent.getStringExtra("ID")
         val myData = Dataset().loadCards(this, id!!)
-        if (myData.isEmpty()) binding.nothing.visibility = View.INVISIBLE
-        else binding.nothing.visibility = View.VISIBLE
+        if (myData.isEmpty()) binding.nothing.visibility = View.VISIBLE
+        else binding.nothing.visibility = View.INVISIBLE
         val recycler = binding.cards
         recycler.adapter = CardAdapter(this, myData)
         recycler.setHasFixedSize(true)
@@ -36,5 +29,19 @@ class EditCardSet : AppCompatActivity() {
             intent.putExtra("ID", id)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding = ActivityEditCardSetBinding.inflate(layoutInflater)
+        val id = intent.getStringExtra("ID")
+        val myData = Dataset().loadCards(this, id!!)
+        if (myData.isEmpty()) binding.nothing.visibility = View.VISIBLE
+        else binding.nothing.visibility = View.INVISIBLE
+        val recycler = binding.cards
+        recycler.adapter = CardAdapter(this, myData)
+        recycler.setHasFixedSize(true)
+
     }
 }

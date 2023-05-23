@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         val myData = Dataset().loadData(this)
-        if (myData.isEmpty()) binding.nothing.visibility = View.INVISIBLE
-        else binding.nothing.visibility = View.VISIBLE
+        if (myData.isEmpty()) binding.nothing.visibility = View.VISIBLE
+        else binding.nothing.visibility = View.INVISIBLE
         val recycler = binding.recycler
         recycler.adapter = CardSetAdapter(this, myData)
         recycler.setHasFixedSize(true)
